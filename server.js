@@ -10,6 +10,7 @@ const instagramAPI = new InstagramAPI(process.env.TOKEN)
 instagramAPI.mediaByShortcode(process.env.SHORTCODE)
   .then((result) => {
     console.log(result.data.tags)
+    console.log(result.data.images.standard_resolution)
 })
 
 app.listen('3000', () => {
