@@ -7,6 +7,14 @@ dotenv.config()
 const InstagramAPI = require('instagram-api')
 const instagramAPI = new InstagramAPI(process.env.TOKEN)
 
+instagramAPI.userSelf()
+  .then(function(result) {
+    console.log(result.limit)
+    console.log(result.remaining)
+}, function(err){
+    console.log(err)
+})
+
 instagramAPI.mediaByShortcode(process.env.SHORTCODE)
   .then((result) => {
     console.log(result.data.tags)
