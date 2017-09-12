@@ -1,23 +1,15 @@
 const express = require('express')
 const app = express()
 const dotenv = require('dotenv')
-const Instagram = require('node-instagram').default
 
 dotenv.config()
 
-const instagram = new Instagram({
-  clientId: process.env.CLIENT_ID,
-  clientSecret: process.env.CLIENT_SC,
-  accessToken: process.env.TOKEN,
-})
+const InstagramAPI = require('instagram-api')
+const instagramAPI = new InstagramAPI(process.env.TOKEN)
 
-instagram.get('users/self', (err,data) => {
-  if(err) {
-    console.log(err)
-  }
-  else {
-    console.log(data)
-  }
+instagramAPI.mediaByShortcode(process.env.SHORTCODE)
+  .then((result) => {
+    console.log(result.data.tags)
 })
 
 app.listen('3000', () => {
